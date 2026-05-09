@@ -1,6 +1,6 @@
 "use client";
 
-import { GitBranch, Link2, Mail } from "lucide-react";
+import { GitBranch, Link2, Mail, MapPin, Phone } from "lucide-react";
 import { SectionShell } from "@/components/SectionShell";
 
 export function Contact() {
@@ -14,6 +14,22 @@ export function Contact() {
           Interested in machine learning, data analytics, and AI systems roles where
           practical models can create measurable business value.
         </p>
+        <div className="mt-6 grid gap-3 md:grid-cols-2">
+          <div className="flex items-start gap-3 border border-border bg-bg p-4">
+            <MapPin className="mt-1 text-teal" size={18} />
+            <p className="leading-7 text-muted">
+              18, LRG Layout, 3rd Street, Ranganathapuram Extn, Rayapuram,
+              Tiruppur - 641601
+            </p>
+          </div>
+          <a
+            href="tel:+919952146753"
+            className="flex items-center gap-3 border border-border bg-bg p-4 leading-7 text-muted transition hover:border-teal/80 hover:text-text-primary"
+          >
+            <Phone className="text-teal" size={18} />
+            +91 99521 46753
+          </a>
+        </div>
 
         <div className="mt-8 flex flex-col gap-4 sm:flex-row">
           <a
