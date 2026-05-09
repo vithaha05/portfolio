@@ -1,6 +1,10 @@
 # Vithahaselvi Haribalajhee Portfolio
 
-A dark, minimal, technical personal portfolio built with Next.js 14, TypeScript, Tailwind CSS, Framer Motion, Lucide React, and Google Fonts through `next/font`.
+A dark, technical developer portfolio for Vithahaselvi Haribalajhee, built with Next.js 14, TypeScript, Tailwind CSS, Framer Motion, Lucide React, and Google Fonts through `next/font`.
+
+## Live Site
+
+[https://portfolio-green-one-32.vercel.app](https://portfolio-green-one-32.vercel.app)
 
 ## Tech Stack
 
@@ -9,7 +13,7 @@ A dark, minimal, technical personal portfolio built with Next.js 14, TypeScript,
 - Tailwind CSS
 - Framer Motion
 - Lucide React
-- Space Grotesk and Fira Code via `next/font`
+- Space Grotesk, Inter, and Fira Code via `next/font`
 
 ## Getting Started
 
@@ -25,7 +29,7 @@ Run the development server:
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser. If port 3000 is busy, Next.js will suggest another local URL such as `http://localhost:3001`.
 
 ## Scripts
 
@@ -43,19 +47,18 @@ src/
   app/
     layout.tsx
     page.tsx
+    globals.css
+    opengraph-image.tsx
+    icon.svg
   components/
     Navbar.tsx
+    CustomCursor.tsx
     sections/
-      Hero.tsx
-      About.tsx
-      Skills.tsx
-      Projects.tsx
-      Education.tsx
-      Activities.tsx
-      Contact.tsx
+    ui/
   data/
     projects.ts
     skills.ts
+    activities.ts
+  hooks/
   types/
-    index.ts
 ```

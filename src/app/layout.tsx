@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Code, Space_Grotesk } from "next/font/google";
+import { Fira_Code, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -14,11 +14,17 @@ const firaCode = Fira_Code({
   display: "swap",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vithahaselvi.dev"),
-  title: "Vithahaselvi Haribalajhee | ML & AI Developer",
+  metadataBase: new URL("https://portfolio-green-one-32.vercel.app"),
+  title: "Vithahaselvi Haribalajhee — ML & AI Developer",
   description:
-    "Personal portfolio of Vithahaselvi Haribalajhee, an ML & AI Developer and M.Sc. Theoretical Computer Science student in Coimbatore, India.",
+    "MSc TCS student at PSG College of Technology. Building ML pipelines, RAG systems, and data engineering solutions. Seeking internship May-Dec 2026.",
   keywords: [
     "Vithahaselvi Haribalajhee",
     "ML Developer",
@@ -30,19 +36,31 @@ export const metadata: Metadata = {
   authors: [{ name: "Vithahaselvi Haribalajhee", url: "https://github.com/vithaha05" }],
   creator: "Vithahaselvi Haribalajhee",
   openGraph: {
-    title: "Vithahaselvi Haribalajhee | ML & AI Developer",
+    title: "Vithahaselvi Haribalajhee — ML & AI Developer",
     description:
-      "Projects in financial analytics, fraud detection, RAG systems, predictive maintenance, mental health AI, and data engineering.",
-    url: "https://vithahaselvi.dev",
+      "MSc TCS student building ML pipelines, RAG systems, and data engineering solutions.",
+    url: "https://portfolio-green-one-32.vercel.app",
     siteName: "Vithahaselvi Haribalajhee Portfolio",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Vithahaselvi Haribalajhee portfolio preview",
+      },
+    ],
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vithahaselvi Haribalajhee | ML & AI Developer",
+    title: "Vithahaselvi Haribalajhee — ML & AI Developer",
     description:
-      "ML & AI Developer seeking May-Dec 2026 internship opportunities in data analytics and AI systems.",
+      "MSc TCS student at PSG College of Technology. Building ML pipelines, RAG systems, and data engineering solutions. Seeking internship May-Dec 2026.",
+    images: ["/opengraph-image"],
+  },
+  icons: {
+    icon: "/icon.svg",
   },
   robots: {
     index: true,
@@ -57,7 +75,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${spaceGrotesk.variable} ${firaCode.variable} antialiased`}>
+      <body
+        className={`${spaceGrotesk.variable} ${firaCode.variable} ${inter.variable} antialiased`}
+      >
         {children}
       </body>
     </html>
