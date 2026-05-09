@@ -6,21 +6,11 @@ export const skillCategories: SkillCategory[] = [
     skills: ["Python", "C++", "SQL", "C", "Java", "R", "HTML", "CSS"],
   },
   {
-    title: "Platforms",
-    skills: ["Windows", "Linux"],
-  },
-  {
-    title: "Tools & ML/Data",
+    title: "ML/Data",
     skills: [
-      "Git",
-      "React",
-      "TypeScript",
-      "Visual Studio Code",
       "Scikit-learn",
       "NumPy",
       "Pandas",
-      "Jupyter Notebook",
-      "Docker",
       "XGBoost",
       "NetworkX",
       "LangChain",
@@ -30,16 +20,11 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: "Databases",
-    skills: ["MySQL", "PostgreSQL", "SQLite", "Oracle SQL"],
+    title: "Dev Tools",
+    skills: ["Git", "React", "TypeScript", "Docker", "Jupyter Notebook", "VS Code"],
   },
   {
-    title: "Areas of Interest",
-    skills: [
-      "Machine Learning",
-      "Artificial Intelligence",
-      "Statistical Modelling & Insights",
-      "Data Analytics & Visualization",
-    ],
+    title: "Databases",
+    skills: ["MySQL", "PostgreSQL", "SQLite", "Oracle SQL"],
   },
 ];
