@@ -22,9 +22,11 @@ export interface EducationItem {
   institution: string;
   year: string;
   grade: string;
+  initials?: string;
 }
 
 export interface Activity {
   title: string;
   description?: string;
+  icon?: string;
 }

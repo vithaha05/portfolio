@@ -28,8 +28,8 @@ export function SectionShell({
       transition={{ duration: 0.55, ease: "easeOut" }}
     >
       <div className="mb-10">
-        <p className="font-code text-xs uppercase tracking-[0.28em] text-teal">{eyebrow}</p>
-        <h2 className="mt-3 text-3xl font-semibold text-text-primary sm:text-4xl">
+        <p className="font-code text-xs uppercase tracking-[0.28em] text-accent">{eyebrow}</p>
+        <h2 className="mt-3 font-space-grotesk text-3xl font-bold text-text sm:text-4xl">
           {title}
         </h2>
       </div>

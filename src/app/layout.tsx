@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Code, Space_Grotesk } from "next/font/google";
+import { Fira_Code, Space_Grotesk, Lora } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -14,11 +14,17 @@ const firaCode = Fira_Code({
   display: "swap",
 });
 
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://vithahaselvi.dev"),
-  title: "Vithahaselvi Haribalajhee | ML & AI Developer",
+  title: "Vithahaselvi Haribalajhee — ML & AI Developer",
   description:
-    "Personal portfolio of Vithahaselvi Haribalajhee, an ML & AI Developer and M.Sc. Theoretical Computer Science student in Coimbatore, India.",
+    "MSc TCS student at PSG Tech building ML pipelines, RAG systems & data solutions. Seeking internship May–Dec 2026.",
   keywords: [
     "Vithahaselvi Haribalajhee",
     "ML Developer",
@@ -30,7 +36,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Vithahaselvi Haribalajhee", url: "https://github.com/vithaha05" }],
   creator: "Vithahaselvi Haribalajhee",
   openGraph: {
-    title: "Vithahaselvi Haribalajhee | ML & AI Developer",
+    title: "Vithahaselvi Haribalajhee — ML & AI Developer",
     description:
       "Projects in financial analytics, fraud detection, RAG systems, predictive maintenance, mental health AI, and data engineering.",
     url: "https://vithahaselvi.dev",
@@ -40,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vithahaselvi Haribalajhee | ML & AI Developer",
+    title: "Vithahaselvi Haribalajhee — ML & AI Developer",
     description:
       "ML & AI Developer seeking May-Dec 2026 internship opportunities in data analytics and AI systems.",
   },
@@ -57,7 +63,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${spaceGrotesk.variable} ${firaCode.variable} antialiased`}>
+      <body className={`${spaceGrotesk.variable} ${firaCode.variable} ${lora.variable} antialiased`}>
         {children}
       </body>
     </html>
