@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Fira_Code, Space_Grotesk, Lora } from "next/font/google";
 import "./globals.css";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { CustomCursor } from "@/components/CustomCursor";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -64,6 +66,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${spaceGrotesk.variable} ${firaCode.variable} ${lora.variable} antialiased`}>
+        <ScrollProgress />
+        <CustomCursor />
         {children}
       </body>
     </html>

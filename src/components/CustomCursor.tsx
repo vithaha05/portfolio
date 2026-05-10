@@ -1,85 +1,98 @@
-"use client";
+'use client'
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPointerFine, setIsPointerFine] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { stiffness: 110, damping: 20, mass: 0.6 };
+  const ringX = useSpring(mouseX, springConfig);
+  const ringY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Check if device is touch
-    const checkTouch = () =>
-      window.matchMedia("(pointer: coarse)").matches ||
-      navigator.maxTouchPoints > 0 ||
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (navigator as any).msMaxTouchPoints > 0;
-    
-    setIsTouchDevice(checkTouch());
-  }, []);
-
-  useEffect(() => {
-    if (isTouchDevice || !cursorRef.current) return;
-
-    const cursor = cursorRef.current;
-    let x = 0;
-    let y = 0;
-    let targetX = 0;
-    let targetY = 0;
+    const isFine = window.matchMedia("(pointer: fine)").matches;
+    setIsPointerFine(isFine);
+    if (!isFine) return;
 
     const handleMouseMove = (e: MouseEvent) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      if (!isVisible) setIsVisible(true);
     };
 
-    const handleMouseEnter = (e: MouseEvent) => {
+    const handleMouseDown = () => setIsMouseDown(true);
+    const handleMouseUp = () => setIsMouseDown(false);
+
+    const handleOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.tagName === "A" || target.tagName === "BUTTON") {
+      if (target.closest('a, button')) {
         setIsHovering(true);
       }
     };
 
-    const handleMouseLeave = (e: MouseEvent) => {
+    const handleOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.tagName === "A" || target.tagName === "BUTTON") {
+      if (target.closest('a, button')) {
         setIsHovering(false);
       }
     };
 
-    const animate = () => {
-      // Lerp for smooth following
-      x += (targetX - x) * 0.15;
-      y += (targetY - y) * 0.15;
-
-      cursor.style.left = `${x - 5}px`;
-      cursor.style.top = `${y - 5}px`;
-
-      requestAnimationFrame(animate);
-    };
-
     window.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseenter", handleMouseEnter, true);
-    document.addEventListener("mouseleave", handleMouseLeave, true);
-
-    animate();
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mouseover", handleOver);
+    document.addEventListener("mouseout", handleOut);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseenter", handleMouseEnter, true);
-      document.removeEventListener("mouseleave", handleMouseLeave, true);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouseover", handleOver);
+      document.removeEventListener("mouseout", handleOut);
     };
-  }, [isTouchDevice]);
+  }, [mouseX, mouseY, isVisible]);
 
-  if (isTouchDevice) return null;
+  if (!isPointerFine || !isVisible) return null;
 
   return (
-    <div
-      ref={cursorRef}
-      className={`pointer-events-none fixed z-[9999] flex items-center justify-center rounded-full bg-accent transition-all duration-200 ${
-        isHovering ? "h-6 w-6 opacity-50" : "h-2.5 w-2.5 opacity-80"
-      }`}
-      style={{ willChange: "transform" }}
-      aria-hidden="true"
-    />
+    <>
+      {/* DOT */}
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 bg-[#F59E0B] rounded-full pointer-events-none z-[9999]"
+        style={{
+          x: mouseX,
+          y: mouseY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          scale: isHovering ? 0 : 1,
+          opacity: isHovering ? 0 : 1,
+        }}
+        transition={{ duration: 0.15 }}
+      />
+      {/* RING */}
+      <motion.div
+        className="fixed top-0 left-0 w-9 h-9 border-[1.5px] border-[#F59E0B]/60 rounded-full pointer-events-none z-[9999]"
+        style={{
+          x: ringX,
+          y: ringY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+        animate={{
+          scale: isMouseDown ? 0.85 : isHovering ? 1.8 : 1,
+          borderColor: isHovering ? "rgba(245,158,11,1)" : "rgba(245,158,11,0.6)",
+          opacity: 1,
+        }}
+      />
+    </>
   );
 }

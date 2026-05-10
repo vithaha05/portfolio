@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Music2 } from "lucide-react";
+import Image from "next/image";
 import { SectionShell } from "@/components/SectionShell";
 
 export function About() {
@@ -43,15 +43,23 @@ export function About() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        {/* LEFT: Photo + Bio + Spotify */}
+        {/* LEFT: Photo + Bio */}
         <motion.div variants={itemVariants} className="flex flex-col items-center lg:items-start">
           {/* Photo */}
-          <div className="relative mb-8">
-            <div className="h-56 w-56 overflow-hidden rounded-full border-4 border-accent bg-surface2 shadow-[0_0_40px_rgba(245,158,11,0.2)]">
-              <div className="h-full w-full bg-gradient-to-br from-accent/20 to-accent2/20 flex items-center justify-center">
-                <span className="font-code text-lg text-muted">Photo</span>
-              </div>
-            </div>
+          <div className="relative w-64 h-64 mx-auto lg:mx-0">
+            {/* Outer gold ring */}
+            <div className="absolute inset-0 rounded-full border-2 border-amber-400/40 scale-110 animate-pulse" />
+            {/* Gold glow behind */}
+            <div className="absolute inset-0 rounded-full bg-amber-400/10 blur-xl scale-125" />
+            {/* The actual photo */}
+            <Image
+              src="/images/avatar.jpeg"
+              alt="Vithahaselvi Haribalajhee"
+              fill
+              quality={100}
+              className="rounded-full object-cover object-center border-2 border-amber-400/30"
+              priority
+            />
           </div>
 
           {/* Name & Role */}
@@ -65,36 +73,6 @@ export function About() {
             from fraud detection pipelines to AI-powered document search. When I&apos;m not coding, I&apos;m probably
             in a hackathon or buried in a paper about something that&apos;ll take me three days to fully understand.
           </p>
-
-          {/* Spotify-style Now Playing */}
-          <div className="mt-8 w-full max-w-sm rounded-lg border border-accent/30 bg-surface p-4">
-            <div className="mb-3 flex items-center gap-2">
-              <span className="relative h-2.5 w-2.5 rounded-full bg-green-500">
-                <span className="absolute inset-0 animate-pulse rounded-full bg-green-500" />
-              </span>
-              <span className="font-code text-xs uppercase tracking-[0.1em] text-muted">Now Playing</span>
-            </div>
-            <div className="flex items-start gap-3">
-              <Music2 className="mt-0.5 text-accent" size={20} />
-              <div className="flex-1">
-                <p className="font-code font-semibold text-text">Imaye Imaye</p>
-                <p className="font-code text-xs text-muted">Must Date the Playboy OST</p>
-              </div>
-            </div>
-            {/* Audio bars */}
-            <div className="mt-3 flex items-end justify-center gap-1">
-              {[0, 0.4, 0.8, 0.6].map((delay, i) => (
-                <div
-                  key={i}
-                  className="h-2 w-1 bg-green-500"
-                  style={{
-                    animation: `bounce 0.5s ease-in-out infinite`,
-                    animationDelay: `${delay}s`,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
         </motion.div>
 
         {/* RIGHT: Stats + Education */}

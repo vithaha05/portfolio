@@ -21,6 +21,7 @@
 
 html {
   background: var(--bg);
+  cursor: none;
 }
 
 body {
@@ -34,6 +35,7 @@ a,
 button {
   outline-color: #F59E0B;
   outline-offset: 4px;
+  cursor: none;
 }
 
 ::selection {
